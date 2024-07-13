@@ -1,0 +1,16 @@
+<div class="grid-container" style="padding: 10px" #contentToConvert>
+  <div style="display:flex;justify-content: space-between">
+    <h2>Dashboard</h2>
+    <button mat-stroked-button (click)="convetToPDF()">
+          <mat-icon>print</mat-icon>
+          Print
+        </button>
+  </div>
+  <div style="display:flex;flex-wrap: wrap">
+  @if (activities.length > 0){
+    <app-all-activities [activities]="activities"></app-all-activities>
+    <app-reppeted-action [stats]="dataService.statistics.actionsRepetition"></app-reppeted-action>
+    <app-rush-hours [stats]="dataService.statistics.actionsByTime"></app-rush-hours>
+  }
+  </div>
+</div>
