@@ -1,6 +1,6 @@
 <section>
 <h3>All activities</h3>
-<mat-form-field>
+<mat-form-field class="dontPrint">
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="MyDocument.txt" #input>
 </mat-form-field>
@@ -40,5 +40,5 @@
   </tr>
 </table>
 
-<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+<mat-paginator class="dontPrint" [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
 </section>
