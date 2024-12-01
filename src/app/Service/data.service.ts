@@ -12,7 +12,9 @@ export class DataService {
   public activitiesObservable: BehaviorSubject<Activity[]|null> = new BehaviorSubject<Activity[]|null>([]);
   public statistics: Statistics = new Statistics();
 
-  constructor() { }
+  constructor() {
+
+  }
 
   addActivities(data: Activity): void {
     data.convert();

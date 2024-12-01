@@ -11,6 +11,7 @@
     <app-all-activities [activities]="activities" style="flex: 1 1 100%;"></app-all-activities>
     <app-reppeted-action [stats]="dataService.statistics.actionsRepetition" style="flex: 1 1 50%;"></app-reppeted-action>
     <app-rush-hours [stats]="dataService.statistics.actionsByTime" style="flex: 1 1 50%; margin: auto"></app-rush-hours>
+    <app-reppeted-action-type [stats]="dataService.statistics.actionsByType" style="flex: 1 1 100%;"></app-reppeted-action-type>
   }
   </div>
 </div>

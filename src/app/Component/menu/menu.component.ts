@@ -1,5 +1,6 @@
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import {Component, ElementRef, inject, ViewChild} from '@angular/core';
+import fs from 'node:fs';
 import {map, Observable, shareReplay} from 'rxjs';
 import {Activity} from '../../Model/activity';
 import {DataService} from '../../Service/data.service';
@@ -14,7 +15,8 @@ export class MenuComponent {
   @ViewChild('fileSelector') fileSelector!: ElementRef;
   private breakpointObserver = inject(BreakpointObserver);
 
-  constructor(protected dataService: DataService) {}
+  constructor(protected dataService: DataService) {
+  }
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
                                         .pipe(

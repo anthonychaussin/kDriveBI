@@ -4,6 +4,10 @@ import {Activity} from './activity';
 
 export class Statistics {
   activityNumber: number = 0;
+  activitiesThisMonth: number = 0;
+  activitiesThisYear: number = 0;
+  activitesLastMonth: number = 0;
+  activitiesLastYear: number = 0;
   users: string[] = [];
   actionsByType: {} = {};
   actionsByTime: {} = {};
@@ -20,6 +24,7 @@ export class Statistics {
     this.users = await this.extractUsers(activites);
 
     await Promise.all([
+                        await this.getEvolution(activites),
                         await this.getActionsByDate(activites),
                         await this.getActivityByUser(activites),
                         await this.getActionsByUser(activites),
@@ -29,6 +34,7 @@ export class Statistics {
                         await this.getActionsByDay(activites),
                         await this.getActionsByMonth(activites),
                         await this.getActionsByYear(activites),
+                        await this.getMostUserAgent(activites),
                       ]);
   }
 
@@ -156,6 +162,21 @@ export class Statistics {
     this.actionsRepetition = activities
       .filter(a => a.ActionTypeEnum !== ActionType.user_connected && a.Description != null)
       .reduce((result: any, currentValue: any) => {
+        if (result[currentValue.UserAgent]) {
+          result[currentValue.UserAgent]++;
+        } else {
+          result[currentValue.UserAgent] = 1;
+        }
+        return result;
+      }, {});
+  }
+
+
+  private async getMostUserAgent(activities: Activity[]): Promise<void> {
+    await Promise.resolve();
+    this.actionsRepetition = activities
+      .filter(a => a.UserAgent != null)
+      .reduce((result: any, currentValue: any) => {
         if (result[currentValue.Description]) {
           result[currentValue.Description]++;
         } else {
@@ -163,5 +184,17 @@ export class Statistics {
         }
         return result;
       }, {});
+  }
+
+  private async getEvolution(activities: Activity[]): Promise<void> {
+    await Promise.resolve();
+    const currentYear = new Date().getFullYear();
+    const lastYear = new Date().getFullYear() -1;
+    const currentMonth = new Date().getMonth();
+    const lastMonth = new Date().getMonth() -1;
+    this.activitiesThisYear = activities.filter(a => a.Date.getFullYear() === currentYear).length;
+    this.activitiesLastYear = activities.filter(a => a.Date.getFullYear() === lastYear).length;
+    this.activitiesThisMonth = activities.filter(a => a.Date.getMonth() === currentMonth).length;
+    this.activitesLastMonth = activities.filter(a => a.Date.getMonth() === lastMonth).length;
   }
 }
