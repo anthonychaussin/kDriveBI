@@ -1,4 +1,4 @@
-import {Component, Input, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -8,7 +8,7 @@ import {MatTableDataSource} from '@angular/material/table';
   templateUrl: './reppeted-action.component.html',
   styleUrl: './reppeted-action.component.scss'
 })
-export class ReppetedActionComponent {
+export class ReppetedActionComponent implements AfterViewInit{
   displayedColumns: string[] = ['Description', 'Count'];
   dataSource: MatTableDataSource<{"Description": string, "Count": number}>;
   @Input() stats: {} = {};

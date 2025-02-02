@@ -18,6 +18,7 @@ export class Statistics {
   actionsByDay: {} = {};
   actionsByMonth: {} = {};
   actionsByYear: {} = {};
+  mostUserAgent: {} = {};
 
   async UpdateData(activites: Activity[]): Promise<void> {
     this.activityNumber = activites.length;
@@ -162,10 +163,10 @@ export class Statistics {
     this.actionsRepetition = activities
       .filter(a => a.ActionTypeEnum !== ActionType.user_connected && a.Description != null)
       .reduce((result: any, currentValue: any) => {
-        if (result[currentValue.UserAgent]) {
-          result[currentValue.UserAgent]++;
+        if (result[currentValue.Description]) {
+          result[currentValue.Description]++;
         } else {
-          result[currentValue.UserAgent] = 1;
+          result[currentValue.Description] = 1;
         }
         return result;
       }, {});
@@ -174,13 +175,13 @@ export class Statistics {
 
   private async getMostUserAgent(activities: Activity[]): Promise<void> {
     await Promise.resolve();
-    this.actionsRepetition = activities
+    this.mostUserAgent = activities
       .filter(a => a.UserAgent != null)
       .reduce((result: any, currentValue: any) => {
-        if (result[currentValue.Description]) {
-          result[currentValue.Description]++;
+        if (result[currentValue.UserAgent]) {
+          result[currentValue.UserAgent]++;
         } else {
-          result[currentValue.Description] = 1;
+          result[currentValue.UserAgent] = 1;
         }
         return result;
       }, {});

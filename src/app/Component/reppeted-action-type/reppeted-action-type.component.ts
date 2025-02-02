@@ -21,7 +21,6 @@ export class ReppetedActionTypeComponent implements AfterViewInit{
         .sort((a, b) => b[1] as number - (a[1] as number))
         .map(s => Object.assign({}, {x: s[0], y: s[1] as number}))
         ;
-      console.info(temp);
       this.chart = new Chart('distributionActionChart', {
         type: 'bar',
         data: {
